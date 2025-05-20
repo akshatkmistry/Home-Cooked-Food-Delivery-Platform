@@ -1,0 +1,26 @@
+.myorder-container {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.order-date {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.order-card {
+  background: #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.order-card-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
