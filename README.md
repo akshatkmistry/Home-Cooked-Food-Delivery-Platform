@@ -1,12 +1,30 @@
-# React + Vite
+# Home-Cooked Food Delivery Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a full-stack **MERN** (MongoDB, Express.js, React, Node.js) project developed as part of my internship at **Infotact Solutions**.
 
-Currently, two official plugins are available:
+## 🔥 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* Browse and order home-cooked meals
+* View and post reviews
+* Dynamic menu from MongoDB
+* Cart and order management
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **Frontend**: React + Vite, MUI, Bootstrap, React Icons
+* **Backend**: Node.js, Express.js
+* **Database**: MongoDB
+
+## 📌 Notes
+
+* This is an in-progress project under active development.
+* Backend endpoints and MongoDB configuration required.
+
+
+## 🤝 Contributing
+🚀 Feel free to fork the repository and submit pull requests! Contributions are welcome.  
+
+
+## 📧 Contact
+For any queries, reach out via **GitHub Issues** or email at:  
+✉️ **akshatkmistry007@gmail.com**  
