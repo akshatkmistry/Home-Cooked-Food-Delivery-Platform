@@ -2,7 +2,7 @@
 .footer {
   background: linear-gradient(135deg, #2c3e50, #1a1a2e);
   color: #ffffff;
-  padding: 4rem 2rem 2rem;
+  padding: 4rem 2rem 1rem;
   font-family: 'Poppins', sans-serif;
   position: relative;
   overflow: hidden;

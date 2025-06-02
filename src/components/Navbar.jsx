@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './Navbar.css';
 
-import { useCart } from '../components/ContextReducer';
+import { useCart } from './ContextReducer';
 import {
   FiHome,
   FiUserPlus,

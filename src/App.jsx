@@ -1,13 +1,13 @@
 import './App.css';
-import Home from './screens/Home';
-import Login from './screens/Login';
-import Signup from './screens/Signup';
+import Home from './screens/Home.jsx';
+import Login from './screens/Login.jsx';
+import Signup from './screens/Signup.jsx';
 import{BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
-import { CartProvider } from './components/ContextReducer.js';
-import Cart from './screens/Cart';
-import MyOrder from './screens/MyOrder';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { CartProvider } from './components/ContextReducer.jsx';
+import Cart from './screens/Cart.jsx';
+import MyOrder from './screens/MyOrder.jsx';
 function App() {
   return (
   

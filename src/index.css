@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  front-family: 'NHaasGroteskDsPro-65Md', !important;
+  font-family: 'NHaasGroteskDsPro-65Md', !important;
 }
 
 code {
