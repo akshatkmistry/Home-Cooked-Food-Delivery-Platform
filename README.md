@@ -4,8 +4,7 @@ This is a full-stack **MERN** (MongoDB, Express.js, React, Node.js) project deve
 
 ## 🔥 Features
 
-* Browse and order home-cooked meals
-* View and post reviews
+* Browse and order meals
 * Dynamic menu from MongoDB
 * Cart and order management
 
