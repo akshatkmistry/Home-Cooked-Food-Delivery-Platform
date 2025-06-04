@@ -11,6 +11,7 @@ export default function Card(props) {
   const item = props.item;
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState("");
+  const [imageError, setImageError] = useState(false);
 
   const finalPrice = qty * parseInt(options[size] || 0);
 
@@ -19,6 +20,17 @@ export default function Card(props) {
       setSize(priceRef.current.value);
     }
   }, []);
+
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
+  const getImageSrc = () => {
+    if (imageError) {
+      return "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80"; // fallback food image
+    }
+    return item.img;
+  };
 
   const handleAddToCart = async () => {
     let food = data.find((item) => item.id === props.item._id);
@@ -47,11 +59,15 @@ export default function Card(props) {
   return (
     <div className="card-container">
       <div className="custom-card">
-        <div className="price-badge">₹{finalPrice}</div>
-        <img
-          src={item.img}
+        <div className="price-badge">₹{finalPrice}</div>        <img
+          src={getImageSrc()}
           className="card-img-top"
           alt={item.name}
+          onError={handleImageError}
+          style={{ 
+            backgroundColor: imageError ? '#f8f9fa' : 'transparent',
+            transition: 'all 0.3s ease'
+          }}
         />
         <div className="card-body">
           <h5 className="card-title">{item.name}</h5>
