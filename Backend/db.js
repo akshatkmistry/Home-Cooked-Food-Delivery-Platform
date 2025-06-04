@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const mongoURI =
-  "mongodb+srv://Akshat:akshat123@infotactcluster.tl3ahio.mongodb.net/?retryWrites=true&w=majority&appName=InfotactCluster";
+  "";
 
 const mongoDB = async () => {
   try {
