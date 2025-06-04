@@ -31,11 +31,17 @@ export default function Login() {
           setError(json.error);
         } else {
           setError("Invalid email or password");
-        }
-      } else {
+        }      } else {
         localStorage.setItem('userEmail', credentials.email);
         localStorage.setItem('authtoken', json.authToken);
-        navigate("/");
+        localStorage.setItem('userRole', json.role);
+        
+        // Navigate based on role
+        if (json.role === 'chef') {
+          navigate("/chef-dashboard");
+        } else {
+          navigate("/");
+        }
       }
     } catch (error) {
       console.error("Fetch error:", error);
@@ -92,13 +98,6 @@ export default function Login() {
               />
               <label>Password</label>
               <span className="input-icon">🔒</span>
-            </div>
-
-            <div className="form-options">
-              <label className="remember-me">
-                <input type="checkbox" />
-                <span>Remember me</span>
-              </label>
             </div>
 
             <button type="submit" className="login-btn" disabled={isLoading}>
