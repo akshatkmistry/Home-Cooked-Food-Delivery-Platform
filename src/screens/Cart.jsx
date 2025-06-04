@@ -1,6 +1,7 @@
 import React from 'react';
 import { useCart, useDispatchCart } from '../components/ContextReducer';
 import DeleteIcon from '@mui/icons-material/Delete';
+import './Cart.css';
 
 export default function Cart() {
   const data = useCart();
@@ -27,58 +28,71 @@ export default function Cart() {
       dispatch({ type: 'DROP' });
     }
   };
-
   if (data.length === 0) {
     return (
-      <div className="container text-center mt-5">
-        <h3 className="text-muted">🛒 Your Cart is Empty</h3>
+      <div className="cart-container">
+        <div className="container">
+          <div className="empty-cart">
+            <div className="empty-cart-icon">🛒</div>
+            <h3>Your Cart is Empty</h3>
+            <p>Looks like you haven't added any delicious items to your cart yet!</p>
+            <a href="/" className="checkout-btn" style={{ textDecoration: 'none' }}>
+              🍽️ Start Ordering
+            </a>
+          </div>
+        </div>
       </div>
     );
   }
-
   return (
-    <div className="container my-5">
-      <div className="card shadow p-4">
-        <h2 className="mb-4 text-center text-success">🛍️ Your Cart</h2>
-        <div className="table-responsive">
-          <table className="table align-middle table-bordered text-center">
-            <thead className="table-success">
-              <tr>
-                <th>#</th>
-                <th>Item</th>
-                <th>Qty</th>
-                <th>Size</th>
-                <th>Price (₹)</th>
-                <th>Remove</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((food, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{food.name}</td>
-                  <td>{food.qty}</td>
-                  <td>{food.size}</td>
-                  <td>{food.price}</td>
-                  <td>
-                    <button
-                      className="btn btn-outline-danger btn-sm"
-                      onClick={() => dispatch({ type: 'REMOVE', index })}
-                    >
-                      <DeleteIcon />
-                    </button>
-                  </td>
+    <div className="cart-container">
+      <div className="container">
+        <div className="cart-card">
+          <div className="cart-header">
+            <h2 className="cart-title">🛍️ Your Cart</h2>
+          </div>
+          
+          <div className="cart-table-container">
+            <table className="table cart-table align-middle text-center">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Item</th>
+                  <th>Qty</th>
+                  <th>Size</th>
+                  <th>Price (₹)</th>
+                  <th>Remove</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {data.map((food, index) => (
+                  <tr key={index} className="cart-item">
+                    <td><strong>{index + 1}</strong></td>
+                    <td className="item-name">{food.name}</td>
+                    <td><span className="item-qty">{food.qty}</span></td>
+                    <td><span className="item-size">{food.size}</span></td>
+                    <td className="item-price">₹{food.price}</td>
+                    <td>
+                      <button
+                        className="remove-btn"
+                        onClick={() => dispatch({ type: 'REMOVE', index })}
+                        title="Remove from cart"
+                      >
+                        <DeleteIcon />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-        <div className="d-flex justify-content-between align-items-center mt-4 px-2">
-          <h4>Total: ₹{totalPrice}</h4>
-          <button className="btn btn-success btn-lg px-4" onClick={handleCheckOut}>
-            ✅ Check Out
-          </button>
+          <div className="cart-footer">
+            <h4 className="total-price">Total: ₹{totalPrice}</h4>
+            <button className="checkout-btn" onClick={handleCheckOut}>
+              ✅ Check Out
+            </button>
+          </div>
         </div>
       </div>
     </div>
