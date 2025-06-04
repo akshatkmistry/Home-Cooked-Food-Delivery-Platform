@@ -22,13 +22,12 @@ router.post(
 
     try {
       const salt = await bcrypt.genSalt(10);
-      const secPassword = await bcrypt.hash(req.body.password, salt);
-
-      await User.create({
+      const secPassword = await bcrypt.hash(req.body.password, salt);      await User.create({
         name: req.body.name,
         email: req.body.email,
         password: secPassword,
         location: req.body.location,
+        role: req.body.role || 'customer',
       });
 
       res.json({ success: true });
@@ -64,17 +63,16 @@ router.post(
       console.log("Password match:", pwdCompare);
       if (!pwdCompare) {
         return res.status(400).json({ error: "Try to login with correct credentials" });
-      }
-
-      const data = {
+      }      const data = {
         user: {
           id: userData.id,
+          role: userData.role,
         },
       };
 
       const authToken = jwt.sign(data, jwtSecret);
 
-      res.json({ success: true, authToken }); 
+      res.json({ success: true, authToken, role: userData.role });
     } catch (error) {
       console.error(error);
       res.status(500).json({ success: false, error: "Internal server error" });

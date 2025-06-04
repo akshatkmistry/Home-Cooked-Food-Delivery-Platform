@@ -20,6 +20,11 @@ const UserSchema = new Schema({
         type:String,
         required:true
     },
+    role:{
+        type:String,
+        enum:['customer', 'chef'],
+        default:'customer'
+    },
     date:{
         type:Date,
         default:Date.now
