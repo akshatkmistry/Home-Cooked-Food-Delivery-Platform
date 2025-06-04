@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// Ensure we have access to createPortal
+import { createPortal } from 'react-dom';
 
 const OVERLAY_STYLES = {
   position: 'fixed',
@@ -43,7 +45,14 @@ const CLOSE_BUTTON_STYLES = {
   lineHeight: '1',
 };
 
-export default function Modal({ children, onClose }) {
+export default function Model({ children, onClose }) {
+  const portalElement = document.getElementById('cart-root');
+  
+  if (!portalElement) {
+    console.error("Cart root element not found!");
+    return null;
+  }
+  
   return ReactDOM.createPortal(
     <>
       <div style={OVERLAY_STYLES} />
@@ -52,6 +61,6 @@ export default function Modal({ children, onClose }) {
         {children}
       </div>
     </>,
-    document.getElementById('cart-root')
+    portalElement
   );
 }

@@ -13,8 +13,7 @@ router.post(
   [
     body("email").isEmail(),
     body("name", "Name must be at least 5 characters").isLength({ min: 5 }),
-    body("password", "Password must be at least 5 characters").isLength({ min: 5 }),
-  ],
+    body("password", "Password must be at least 5 characters").isLength({ min: 5 }),  ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -34,7 +33,7 @@ router.post(
 
       res.json({ success: true });
     } catch (error) {
-      console.error(error);
+      console.error("Registration error:", error);
       res.status(500).json({ success: false, error: "Internal server error" });
     }
   }

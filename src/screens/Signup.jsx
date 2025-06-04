@@ -5,13 +5,11 @@ import './Signup.css';
 
 export default function Signup() {
     const [credentials, setCredentials] = useState({ name: "", email: "", password: "", geolocation: "" });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const handleSubmit = async (e) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);    const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            const response = await fetch("http://192.168.38.20:5000/api/Createuser", {
+            const response = await fetch("http://localhost:5000/api/createuser", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -29,9 +27,12 @@ export default function Signup() {
             if (json.success) {
                 alert("Account created successfully!");
                 window.location.href = "/login";
-            }
-            if (!json.success) {
-                alert("Enter valid credentials");
+            } else {
+                if (json.errors && json.errors.length > 0) {
+                    alert("Validation errors: " + json.errors.map(err => err.msg).join(", "));
+                } else {
+                    alert("Enter valid credentials");
+                }
             }
         } catch (error) {
             console.error("Fetch error:", error);

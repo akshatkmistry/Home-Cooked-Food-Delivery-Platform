@@ -23,17 +23,18 @@ export default function Login() {
           email: credentials.email,
           password: credentials.password
         })
-      });
-
-      const json = await response.json();
+      });      const json = await response.json();
       console.log(json);
 
       if (!json.success) {
-        setError("Invalid email or password");
-      } 
-      if(json.success) {
+        if (json.error) {
+          setError(json.error);
+        } else {
+          setError("Invalid email or password");
+        }
+      } else {
         localStorage.setItem('userEmail', credentials.email);
-        localStorage.setItem('authtoken', json.authtoken);
+        localStorage.setItem('authtoken', json.authToken);
         navigate("/");
       }
     } catch (error) {

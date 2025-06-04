@@ -5,23 +5,33 @@ import "./MyOrder.css";
 
 export default function MyOrder() {
   const [groupedOrders, setGroupedOrders] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const fetchMyOrder = async () => {
     try {
+      setLoading(true);
+      
+      // Check if user is logged in
+      const userEmail = localStorage.getItem('userEmail');
+      if (!userEmail) {
+        setError("You need to login first");
+        setLoading(false);
+        return;
+      }
+      
       const res = await fetch("http://localhost:5000/api/myOrderData", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: localStorage.getItem('userEmail'),
+          email: userEmail,
         }),
-      });
-
-      const result = await res.json();
+      });      const result = await res.json();
       const nestedData = result.order_data || [];
 
-      // ✅ Flatten nested arrays and group by Order_date
+      // Flatten nested arrays and group by Order_date
       const grouped = {};
       nestedData.forEach(orderGroup => {
         if (!Array.isArray(orderGroup)) return;
@@ -40,6 +50,9 @@ export default function MyOrder() {
       setGroupedOrders(grouped);
     } catch (error) {
       console.error("Fetch order failed:", error);
+      setError("Failed to fetch orders: " + error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -47,17 +60,25 @@ export default function MyOrder() {
     fetchMyOrder();
   }, []);
 
- return (
-  <>
-    <Navbar />
-    <div className="myorder-container container py-4">
-      <h2 className="text-center mb-4">My Orders</h2>
-      {Object.keys(groupedOrders).length === 0 ? (
-        <h5 className="text-center text-muted">You have no past orders.</h5>
-      ) : (
-        Object.entries(groupedOrders)
-          .reverse()
-          .map(([date, items], index) => (
+  return (
+    <>
+      <Navbar />
+      <div className="myorder-container container py-4">
+        <h2 className="text-center mb-4">My Orders</h2>
+        
+        {loading ? (
+          <div className="text-center py-5">
+            <div className="spinner-border text-success" role="status" />
+            <p className="mt-3">Loading your orders...</p>
+          </div>
+        ) : error ? (
+          <div className="alert alert-danger mt-3">{error}</div>
+        ) : Object.keys(groupedOrders).length === 0 ? (
+          <h5 className="text-center text-muted">You have no past orders.</h5>
+        ) : (
+          Object.entries(groupedOrders)
+            .reverse()
+            .map(([date, items], index) => (
             <div key={index} className="mb-5">
               <h6 className="order-date text-center mb-3">
                 <span className="badge bg-light text-dark shadow-sm px-3 py-2">

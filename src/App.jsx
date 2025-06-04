@@ -10,20 +10,18 @@ import Cart from './screens/Cart.jsx';
 import MyOrder from './screens/MyOrder.jsx';
 function App() {
   return (
-  
     <CartProvider>
-    <Router>
-  <div>
-    <Routes>
-      <Route extact path="/" element={<Home/>} />
-      <Route extact path="/login" element={<Login/>} />
-      <Route extact path="/createuser" element={<Signup/>} />
-      <Route extact path="/cart" element={<Cart/>} />
-      <Route extact path="/myorder" element={<MyOrder/>} />
-
-    </Routes>
-  </div>
-    </Router>
+      <Router>
+        <div>
+          <Routes>
+            <Route exact path="/" element={<Home/>} />
+            <Route exact path="/login" element={<Login/>} />
+            <Route exact path="/createuser" element={<Signup/>} />
+            <Route exact path="/cart" element={<Cart/>} />
+            <Route exact path="/myorder" element={<MyOrder/>} />
+          </Routes>
+        </div>
+      </Router>
     </CartProvider>
   ); 
 }

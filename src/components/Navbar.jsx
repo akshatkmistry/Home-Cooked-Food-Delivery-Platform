@@ -25,12 +25,24 @@ export default function Navbar() {
     localStorage.removeItem("authtoken");
     navigate("/login");
   };
-
-  return (
+  
+  // Function to check if user is logged in
+  const isLoggedIn = () => {
+    return localStorage.getItem("authtoken") !== null;
+  };
+  
+  // Function to handle navigation
+  const handleNavigate = (path) => {
+    navigate(path);
+  };  return (
     <>
       <nav className="navbar navbar-expand-lg glass-navbar fixed-top">
         <div className="container">
-          <Link className="navbar-brand fs-3 fw-bold text-white brand-animate" to="/">
+          <Link 
+            className="navbar-brand fs-3 fw-bold text-white brand-animate" 
+            onClick={() => handleNavigate('/')}
+            style={{ cursor: 'pointer' }}
+          >
             🍽️ <span className="text-brand">Foodela</span>
           </Link>
 
@@ -49,36 +61,46 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav mx-auto gap-3">
               <li className="nav-item">
-                <Link className="nav-link icon-link" to="/" title="Home">
+                <div 
+                  className="nav-link icon-link" 
+                  onClick={() => handleNavigate('/')} 
+                  title="Home"
+                  style={{ cursor: 'pointer' }}
+                >
                   <FiHome size={20} />
-                </Link>
+                </div>
               </li>
-              {localStorage.getItem("authtoken") && (
+              {isLoggedIn() && (
                 <li className="nav-item">
-                  <Link className="nav-link icon-link" to="/myOrder" title="My Orders">
+                  <div 
+                    className="nav-link icon-link" 
+                    onClick={() => handleNavigate('/myorder')} 
+                    title="My Orders"
+                    style={{ cursor: 'pointer' }}
+                  >
                     <FiClipboard size={20} />
-                  </Link>
+                  </div>
                 </li>
               )}
-            </ul>
-
-            <div className="d-flex align-items-center gap-3">
-              {!localStorage.getItem("authtoken") ? (
+            </ul>            <div className="d-flex align-items-center gap-3">
+              {!isLoggedIn() ? (
                 <>
-                  <Link
-                    to="/login"
+                  <div
                     className="btn icon-btn btn-outline-light"
+                    onClick={() => handleNavigate('/login')}
                     title="Login"
+                    style={{ cursor: 'pointer' }}
                   >
                     <FiLogIn size={18} />
-                  </Link>
-                  <Link
-                    to="/createuser"
+                  </div>
+                  <div
                     className="btn icon-btn btn-brand"
+                    onClick={() => handleNavigate('/createuser')}
                     title="Register"
+                    style={{ cursor: 'pointer' }}
                   >
                     <FiUserPlus size={18} />
-                  </Link>
+                  </div>
                 </>
               ) : (
                 <>
@@ -86,9 +108,11 @@ export default function Navbar() {
                     className="position-relative cart-icon"
                     onClick={() => setCartView(true)}
                     title="Cart"
+                    role="button"
+                    style={{ cursor: 'pointer' }}
                   >
                     <FiShoppingCart size={22} className="text-white" />
-                    {data.length > 0 && (
+                    {data && data.length > 0 && (
                       <span className="cart-badge">{data.length}</span>
                     )}
                   </div>
