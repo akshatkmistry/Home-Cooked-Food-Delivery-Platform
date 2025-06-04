@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Signup.css'; 
 
 export default function Signup() {
-    const [credentials, setCredentials] = useState({ name: "", email: "", password: "", geolocation: "" });
-    const [isSubmitting, setIsSubmitting] = useState(false);    const handleSubmit = async (e) => {
+    const [credentials, setCredentials] = useState({ name: "", email: "", password: "", geolocation: "", role: "customer" });
+    const [isSubmitting, setIsSubmitting] = useState(false);const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
         try {
@@ -13,12 +13,12 @@ export default function Signup() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
+                },                body: JSON.stringify({
                     name: credentials.name,
                     email: credentials.email,
                     password: credentials.password,
-                    location: credentials.geolocation
+                    location: credentials.geolocation,
+                    role: credentials.role
                 })
             });
 
@@ -51,7 +51,6 @@ export default function Signup() {
             <div className="signup-card">
                 <div className="signup-header">
                     <h1>Create Your Account</h1>
-                    <p>Join our community today</p>
                 </div>
                 
                 <form onSubmit={handleSubmit} className="signup-form">
@@ -95,9 +94,7 @@ export default function Signup() {
                         <span className="input-icon">
                             <i className="fas fa-lock"></i>
                         </span>
-                    </div>
-
-                    <div className="form-group">
+                    </div>                    <div className="form-group">
                         <input 
                             type="text" 
                             name="geolocation" 
@@ -108,6 +105,23 @@ export default function Signup() {
                         <label htmlFor="geolocation">Address</label>
                         <span className="input-icon">
                             <i className="fas fa-map-marker-alt"></i>
+                        </span>
+                    </div>
+
+                    <div className="form-group">
+                        <select 
+                            name="role" 
+                            value={credentials.role} 
+                            onChange={onChange} 
+                            className="role-select"
+                            required
+                        >
+                            <option value="customer">Customer</option>
+                            <option value="chef">Chef</option>
+                        </select>
+                        <label htmlFor="role">I am a</label>
+                        <span className="input-icon">
+                            <i className="fas fa-users"></i>
                         </span>
                     </div>
 
