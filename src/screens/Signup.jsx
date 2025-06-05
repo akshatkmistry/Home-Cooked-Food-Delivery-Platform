@@ -5,7 +5,8 @@ import './Signup.css';
 
 export default function Signup() {
     const [credentials, setCredentials] = useState({ name: "", email: "", password: "", geolocation: "", role: "customer" });
-    const [isSubmitting, setIsSubmitting] = useState(false);const handleSubmit = async (e) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
         try {

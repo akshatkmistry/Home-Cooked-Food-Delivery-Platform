@@ -13,7 +13,8 @@ function App() {
   return (
     <CartProvider>
       <Router>
-        <div>          <Routes>
+        <div>
+          <Routes>
             <Route exact path="/" element={<Home/>} />
             <Route exact path="/login" element={<Login/>} />
             <Route exact path="/createuser" element={<Signup/>} />
