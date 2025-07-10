@@ -360,7 +360,7 @@ export default function ChefDashboard() {
               <div key={category._id} className="category-section">
                 <h3 className="category-title">{category.CategoryName}</h3>
                 <hr className="category-divider" />
-                <div className="food-items-grid">
+                <div className="food-grid">
                   {categoryItems.map(item => (
                     <div key={item._id} className="food-item-card">
                       <div className="item-image">
